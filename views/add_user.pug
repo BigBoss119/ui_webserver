@@ -1,0 +1,25 @@
+html
+	head
+	title Welcome
+	style
+		include custom.css
+
+	body
+		include nav.pug
+
+
+
+	div(class='block' style='margin-top: 50px;') 
+			
+		p Please add new users here.
+
+
+		div(style='display: table-caption; padding: 0px 0px 25px 73px;')
+			form(method="POST", action="make")
+				label.Firstname
+					input(type=text, name="firstname", value="newName") 
+				label.Lastname
+					input(type =text, name="lastname", value="Lastname")
+				label.Email
+					input(type= text, name="email", value="Email")
+				input(type= "submit", value="Submit")

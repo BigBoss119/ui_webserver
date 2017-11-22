@@ -1,0 +1,21 @@
+html
+	head
+	style
+		include custom.css
+
+	body
+		include nav.pug
+
+	div(class='block' style='margin-top: 50px;') 
+		p What I have found:
+
+		div(style='display: table-caption; padding: 0px 0px 25px 73px;')
+
+			form(method='POST' action='/found')
+			
+				label Searchbar:
+				input(type='text' name='input')
+
+				input(type='submit' value='submit') 
+
+				p  #{firstname} #{secondname} #{email}
