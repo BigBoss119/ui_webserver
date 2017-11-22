@@ -52,15 +52,14 @@ app.post("/found", function (request, response) {
                     var firstName = theData[i].firstname;
                     var secondName = theData[i].lastname;
                     var emaill = theData[i].email;
-                } else if {
-                  alert("There is no match found.")
-                }
+                } 
             } response.render("found", {  
                 firstname: firstName,
                 secondname: secondName,
                 email: emaill,
                 })  
- })
+
+ }) 
 })
 
 
