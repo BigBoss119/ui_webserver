@@ -81,9 +81,9 @@ response.redirect("/username")
 })
 
 
-var server = app.listen(3000, () => {
-    console.log('This server is listening at port 3000')
-});
+app.listen(3000, ()=>{
+    console.log("Miracle happens on port 3000 =] ")
+})
 
 // isLoggedIn: false, shoppinglist: "shoppinglist"
 // title: "peters home", user: "peter", 
