@@ -1,5 +1,7 @@
 html
 	head
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+		script(src="ajax.js")
 	style
 		include custom.css
 
@@ -14,7 +16,8 @@ html
 			form(method='POST' action='/found')
 			
 				label Searchbar:
-				input(type='text' name='input')
+				input#name(type='text' name='input' list='results')
+				datalist(id='results')
 
 				input(type='submit' value='submit' ) 
 
