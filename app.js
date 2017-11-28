@@ -49,7 +49,7 @@ app.post("/search", (request, response) => {
             }
         } 
         console.log("The suggestions:", usersSug)
-        response.status(200).send({search: \})
+        response.status(200).send({search: usersSug})
 });
 
 })
@@ -65,29 +65,6 @@ app.get("/add_user", (request, response) => {
     response.render("add_user", {title: "Add user page"
                                 })
 })
-
-
-// app.post("/found", function (request, response) {
-//     fs.readFile('users.json', function(err, data) {
-//             if (err) {
-//                 throw err;
-//             }
-//             var theData = JSON.parse(data);
-//             for (var i = 0; i < theData.length; i++) {
-//                 if (request.body.input === theData[i].firstname || request.body.input === theData[i].lastname || request.body.input === theData[i].email) {   
-//                     var firstName = theData[i].firstname;
-//                     var secondName = theData[i].lastname;
-//                     var emaill = theData[i].email;
-//                 } 
-//             } response.render("found", {  
-//                 firstname: firstName,
-//                 secondname: secondName,
-//                 email: emaill,
-//                 })  
-
-//  }) 
-// })
-
 
 app.post("/make", function (request, response) {
 fs.readFile('./users.json', function (err, data) {
@@ -110,6 +87,3 @@ response.redirect("/username")
 app.listen(3000, ()=>{
     console.log("Miracle happens on port 3000 =] ")
 })
-
-// isLoggedIn: false, shoppinglist: "shoppinglist"
-// title: "peters home", user: "peter", 

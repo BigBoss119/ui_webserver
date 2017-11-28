@@ -29,6 +29,7 @@ html
 	script.
 		$(document).ready(function() {
 			console.log ("Ready")
+			var timeOut = true
 			$("#autocomplete").keyup( function (e) { 
 				var peter = {input: e.target.value}
 				$.ajax({
@@ -45,18 +46,8 @@ html
 					}
 				})
 			})
+			setInterval (function () {
+			timeOut = true
+			console.log("Time out is true")
+		}, 300)
 		})
-		//- console.log (ajaxdata)
-
-
-		//- if (ajaxdata.name) {
-		//- 		$.post('/found', ajaxdata, function ( data ) {
-					
-		//- 			var empty = $('#results').empty();
-
-		//- 			for (var person in data) {
-		//- 				$ (empty).append('<option>'+ data[person].firstname + ' ' + '<option>' + data[person].lastname)
-		//- 			}
-		//- 			console.log(data)
-		//- 		})
-		//- }
