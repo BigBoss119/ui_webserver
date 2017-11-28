@@ -29,6 +29,32 @@ app.get("/search", (request, response) => {
 								})
 })
 
+app.post("/search", (request, response) => {
+    console.log("at the post office")
+    fs.readFile('users.json', function(err, data) {
+        if (err) {
+            throw err;
+        }
+        var allContent = request.body
+        console.log(request.body)
+        var userList = JSON.parse(data)
+        var usersSug = []
+        for (var i = 0; i < userList.length; i++){
+            if (request.body.autocomplete === userList[i].firstname || request.body.autocomplete === userList[i].lastname || request.body.autocomplete === userList[i].email){
+                usersSug.push({
+                    firstname: userList[i].firstname,
+                    lastname: userList[i].lastname
+                })
+                console.log("User found")
+            }
+        } 
+        console.log("The suggestions:", usersSug)
+        response.status(200).send({search: \})
+});
+
+})
+
+
 app.get("/found", (request, response) => {
     response.render("found", {title: "Found page",
                                 })
@@ -41,26 +67,26 @@ app.get("/add_user", (request, response) => {
 })
 
 
-app.post("/found", function (request, response) {
-    fs.readFile('users.json', function(err, data) {
-            if (err) {
-                throw err;
-            }
-            var theData = JSON.parse(data);
-            for (var i = 0; i < theData.length; i++) {
-                if (request.body.input === theData[i].firstname || request.body.input === theData[i].lastname || request.body.input === theData[i].email) {   
-                    var firstName = theData[i].firstname;
-                    var secondName = theData[i].lastname;
-                    var emaill = theData[i].email;
-                } 
-            } response.render("found", {  
-                firstname: firstName,
-                secondname: secondName,
-                email: emaill,
-                })  
+// app.post("/found", function (request, response) {
+//     fs.readFile('users.json', function(err, data) {
+//             if (err) {
+//                 throw err;
+//             }
+//             var theData = JSON.parse(data);
+//             for (var i = 0; i < theData.length; i++) {
+//                 if (request.body.input === theData[i].firstname || request.body.input === theData[i].lastname || request.body.input === theData[i].email) {   
+//                     var firstName = theData[i].firstname;
+//                     var secondName = theData[i].lastname;
+//                     var emaill = theData[i].email;
+//                 } 
+//             } response.render("found", {  
+//                 firstname: firstName,
+//                 secondname: secondName,
+//                 email: emaill,
+//                 })  
 
- }) 
-})
+//  }) 
+// })
 
 
 app.post("/make", function (request, response) {

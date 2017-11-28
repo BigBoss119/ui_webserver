@@ -1,7 +1,8 @@
 html
 	head
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-		script(src="ajax.js")
+
+
 	style
 		include custom.css
 
@@ -13,12 +14,49 @@ html
 
 		div(style='display: table-caption; padding: 0px 0px 25px 73px;')
 
-			form(method='POST' action='/found')
+			form(method='POST' action='/search')
 			
 				label Searchbar:
-				input#name(type='text' name='input' list='results')
+				input(type='text' name='autocomplete' list='results')
 				datalist(id='results')
 
 				input(type='submit' value='submit' ) 
 
 				p  #{firstname} #{secondname} #{email}
+
+				p(id="sup")
+
+	script.
+		$(document).ready(function() {
+			console.log ("Ready")
+			$("#autocomplete").keyup( function (e) { 
+				var peter = {input: e.target.value}
+				$.ajax({
+					type: "POST",
+					url: "/search",
+					data: peter,
+					dataType: "json",
+					success: function(result){
+						$("#sup").html(result.input)
+						console.log("The Result", result.search)
+					},
+					error: function(err){
+						console.log(err)
+					}
+				})
+			})
+		})
+		//- console.log (ajaxdata)
+
+
+		//- if (ajaxdata.name) {
+		//- 		$.post('/found', ajaxdata, function ( data ) {
+					
+		//- 			var empty = $('#results').empty();
+
+		//- 			for (var person in data) {
+		//- 				$ (empty).append('<option>'+ data[person].firstname + ' ' + '<option>' + data[person].lastname)
+		//- 			}
+		//- 			console.log(data)
+		//- 		})
+		//- }
