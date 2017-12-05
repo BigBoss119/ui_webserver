@@ -1,11 +1,18 @@
 html
 	head
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-
+		script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+		link(href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet")
 
 	style
 		include custom.css
 
+	style(type='text/css').
+		.ui-front {
+			max-width: 150px;
+			font-size: 12px;
+			}
+		
 	body
 		include nav.pug
 
@@ -14,40 +21,47 @@ html
 
 		div(style='display: table-caption; padding: 0px 0px 25px 73px;')
 
-			form(method='POST' action='/search')
+			form(method='POST' action='/found')
 			
 				label Searchbar:
-				input(type='text' name='autocomplete' list='results')
+				input(type='text' id='autocomplete' list='results' name='input')
 				datalist(id='results')
 
-				input(type='submit' value='submit' ) 
+				input(type='submit' value='submit') 
+
 
 				p  #{firstname} #{secondname} #{email}
 
-				p(id="sup")
 
 	script.
+
 		$(document).ready(function() {
 			console.log ("Ready")
-			var timeOut = true
-			$("#autocomplete").keyup( function (e) { 
-				var peter = {input: e.target.value}
+			var timeOut = Date.now()
+			$("#autocomplete").keyup(function() { 
+			if (Date.now()-timeOut >=300){
+				timeOut =Date.now()
+				var peter = $("#autocomplete").val()
+				if (peter.length > 0 ) {
+				console.log("peterrrr:" + peter)
 				$.ajax({
 					type: "POST",
 					url: "/search",
-					data: peter,
+					data: {searchData: peter},
 					dataType: "json",
 					success: function(result){
-						$("#sup").html(result.input)
-						console.log("The Result", result.search)
+
+					$( "#autocomplete" ).autocomplete({
+
+						source: result.search
+					});
+						console.log("The Result", result)
 					},
 					error: function(err){
 						console.log(err)
 					}
-				})
-			})
-			setInterval (function () {
-			timeOut = true
-			console.log("Time out is true")
-		}, 300)
+
+				})}
+
+			}})
 		})
